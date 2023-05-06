@@ -1,8 +1,9 @@
 const { BookModel } = require("../Model/book.model");
 const express=require('express')
-const jwt=require("jsonwebtoken")
+const jwt=require("jsonwebtoken");
+const { auth } = require("../Middleware/auth.middleware");
 const bookRouter=express.Router()
-bookRouter.post("/add",async(req,res)=>{
+bookRouter.post("/add",auth,async(req,res)=>{
     try{
         const book=new BookModel(req.body)
         await book.save()
